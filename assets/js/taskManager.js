@@ -117,11 +117,7 @@ class TaskManager {
 
             //creating the html string version of the task list object
             let taskHtml = createTaskHtml(taskVariable.name, taskVariable.description, taskVariable.assignedTo, taskVariable.dueDate, taskVariable.status, taskVariable.id);
-
-            //console.log to print out to console to troubleshoot
-            // console.log(`This is the status: ${taskVariable.status}`);
-            // console.log(`This is taskHtml: ${taskHtml}`)
-
+            
             //if to check if status of task matches "To Do", "Doing", "Review", or "Done", then it gets pushed into that respective taskHtmlList. Have to use taskVariable because it is an object with the status variable and not taskHtml because the latter is just a string with html, it doesn't have a single variable called status
             if (taskVariable.status == "To Do") {
                 tasksHtmlListToDo.push(taskHtml);
