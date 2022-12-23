@@ -32,10 +32,6 @@ const createTaskHtml = (name, description, assignedTo, dueDate, status, id) => {
 //Task Manager class
 class TaskManager {
 
-    
-    tasks;
-    currentId;
-
     constructor(currentId = 0) {
         this.tasks = [];
         this.currentId = currentId;
@@ -192,8 +188,6 @@ class TaskManager {
         let buttons = document.querySelector('#DoneColumn').querySelectorAll('.done-button');
         //console.log(buttons);
         for (let i = 0; i < buttons.length; i++) {
-            //sets the button into hidden. Disabled for now until group responds back on how they like to do it.
-            // buttons[i].setAttribute("hidden", true);
             //changes the done button into an x that will allow the user to delete the task
             buttons[i].outerHTML = `<button type="button" class="btn-close" aria-label="Close" value="Delete"></button>`;
         }
@@ -206,15 +200,10 @@ class TaskManager {
         
         const currentId = this.currentId.toString();
         localStorage.setItem('currentId', currentId);
-
-        //console.log(currentId);
-        //console.log(tasksJson);
-
     }
-     
+    
     //load method
     load () {
-        
 
         if(localStorage.getItem('tasks'))
         {
