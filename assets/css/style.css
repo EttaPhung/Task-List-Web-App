@@ -3,8 +3,8 @@
 }
 
 body {
-    background: rgb(152,0,255);
-    background: linear-gradient(180deg, rgba(152,0,255,1) 0%, rgba(255,112,181,0.8390755960587359) 61%, rgba(255,255,255,1) 100%);
+    background: rgb(255,255,255);
+    background: radial-gradient(circle, rgba(255,255,255,1) 6%, rgba(255,112,181,0.9343136912968313) 60%, rgba(165,31,255,0.7998599097842262) 100%); 
 }
 
 h1,h2 {
@@ -20,6 +20,10 @@ h2 {
     text-shadow: 5px 5px 8px white, 0 0 25px brown;
 }
 
+button {
+    background-color: #a51fff;
+}
+
 .header-h1 {
     background-image: url("/assets/images/banner.png");
     background-repeat: no-repeat;
@@ -29,7 +33,7 @@ h2 {
 
 .task {
     color: white;
-    background-color: blue;
+    background-color: #a51fff;
 }
 
 td {

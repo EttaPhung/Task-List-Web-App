@@ -5,14 +5,14 @@ console.log("taskManager.js is linked.");
 //create Task in HTML
 const createTaskHtml = (name, description, assignedTo, dueDate, status, id) => {
     const html = 
-`    <div class="card border-0" data-task-id="${id}" task-status="${status}">
+`    <div class="card border-0 task-card" data-task-id="${id}" task-status="${status}">
         <div class="d-grid gap-2 d-md-flex justify-content-between">
             <h6 class="card-title text-warning">Due: ${dueDate}</h6>
 
-            <button class="btn btn-primary btn-sm dropdown-toggle done-button" type="button" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" data-bs-toggle="dropdown" aria-expanded="false">Status</button>
+            <button class="btn btn-primary btn-sm dropdown-toggle done-button" type="button" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; background-color: #a51fff;" data-bs-toggle="dropdown" aria-expanded="false"></button>
 
             <select class="dropdown-menu">
-            <option value=""></option>
+            <option value="">Status</option>
             <option value="To Do">To Do</option>
             <option value="Doing">Doing</option>
             <option value="Review">Review</option>
