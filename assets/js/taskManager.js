@@ -9,16 +9,18 @@ const createTaskHtml = (name, description, assignedTo, dueDate, status, id) => {
         <div class="d-grid gap-2 d-md-flex justify-content-between">
             <h6 class="card-title text-warning">Due: ${dueDate}</h6>
 
-            <button class="btn btn-primary btn-sm dropdown-toggle done-button" type="button" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; background-color: #a51fff;" data-bs-toggle="dropdown" aria-expanded="false"></button>
+            <div class="btn-group">
+            <button type="button" class="btn btn-primary btn-sm dropdown-toggle done-button" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; background-color: #a51fff;" data-bs-toggle="dropdown" aria-expanded="false">Status</button>
 
-            <select class="dropdown-menu">
-            <option value="">Status</option>
-            <option value="To Do">To Do</option>
-            <option value="Doing">Doing</option>
-            <option value="Review">Review</option>
-            <option value="Done">Done</option>
-            <option value="Delete">Delete</option>
-            </select>
+            <ul class="dropdown-menu select-dropdown">
+            <li class="dropdown-item" value=""></li>
+            <li class="dropdown-item" value="To Do">To Do</li>
+            <li class="dropdown-item" value="Doing">Doing</li>
+            <li class="dropdown-item" value="Review">Review</li>
+            <li class="dropdown-item" value="Done">Done</li>
+            <li class="dropdown-item" value="Delete">Delete</li>
+            </ul>
+        </div>
 
         </div>
         <h4 class="card-subtitle">${name}</h4>
@@ -97,15 +99,15 @@ class TaskManager {
             //The format done in Task 6 has an error where the due date is in utc and the actual due date becomes your local time zone due date, and so it doesn't match up. So this part is changed to a solution found online and the original is commented out
 
             
-            console.log(`time3: ${date}`);
+            // console.log(`time3: ${date}`);
             //changing the date variable to a string (From a previous task, buggy)
             // let formattedDate = date.toDateString();
 
             //found a better solution to the buggy task due date
             let formattedDate = date.toLocaleString('en-US', {timeZone: "UTC", day: "2-digit", month: "short", year: "numeric", weekday: "short"});
 
-            console.log(`time: ${taskVariable.dueDate}`);
-            console.log(`time2: ${formattedDate}`);
+            // console.log(`time: ${taskVariable.dueDate}`);
+            // console.log(`time2: ${formattedDate}`);
             //changing the object's date into the formatted version of date
             taskVariable.dueDate = formattedDate;
 

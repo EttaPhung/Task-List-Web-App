@@ -14,7 +14,6 @@ const newTaskForm = document.querySelector("#taskForm");
 
 //Pointer to status buttons in index.html task list
 const taskList = document.querySelector('#taskCardsSection');
-const statusButton = taskList.querySelectorAll('select')
 
 //Task list form variables
 const submitButton = document.querySelector("#submitButton");
@@ -107,17 +106,18 @@ submitButton.addEventListener("click", validFormFieldInput);
 //function that moves tasks to the done column and change their color to match
 const changeStatus = (data) => {
 
+    console.log(`The data.target.getAttribute("value") is: ${data.target.getAttribute("value")}`)
     //there are errors in the console when the moues isn't clicking something with a value. Not sure if it affects anything to leave it, but just in case, I will add this that exits the function when the value isn't anything we are looking for
-    if (data.target.value == null) {
+    if (data.target.getAttribute("value") == null) {
         return;
     }
 
-    //checking if the button is clicked
-    if (data.target.value.match("Done")) {
+    // console.log(`The card's entire HTML is: ${data.target.parentNode.parentNode.parentNode.parentNode.outerHTML}`);
+    //This points to the card's html. It is pointing to the parent div of the task card
+    let parentTask = data.target.parentNode.parentNode.parentNode.parentNode;
 
-        
-        //pointing to the parent div of the task card
-        let parentTask = data.target.parentNode.parentNode;
+    //checking if the button is clicked
+    if (data.target.getAttribute("value").match("Done")) {
 
         //changing the color of the card into the done column color, gray
         parentTask.querySelector('p').className = "bg-secondary";
@@ -144,10 +144,7 @@ const changeStatus = (data) => {
         //This appends the task card into the Done column
         document.querySelector("#DoneColumn").appendChild(parentTask);
 
-    } else if (data.target.value.match("Review")) {
-
-        //pointing to the parent div of the task card
-        let parentTask = data.target.parentNode.parentNode;
+    } else if (data.target.getAttribute("value").match("Review")) {
 
         //changing the color of the card into the review column color, red
         parentTask.querySelector('p').className = "bg-danger";
@@ -164,11 +161,7 @@ const changeStatus = (data) => {
         //This appends the task card into the review column
         document.querySelector("#ReviewColumn").appendChild(parentTask);
 
-    } else if (data.target.value.match("Doing")) {
-
-        
-        //pointing to the parent div of the task card
-        let parentTask = data.target.parentNode.parentNode;
+    } else if (data.target.getAttribute("value").match("Doing")) {
 
         //changing the color of the card into the Doing column color, yellow
         parentTask.querySelector('p').className = "bg-warning";
@@ -185,10 +178,7 @@ const changeStatus = (data) => {
         //This appends the task card into the Doing column
         document.querySelector("#DoingColumn").appendChild(parentTask);
 
-    } else if (data.target.value.match("To Do")) {
-        
-        //pointing to the parent div of the task card
-        let parentTask = data.target.parentNode.parentNode;
+    } else if (data.target.getAttribute("value").match("To Do")) {
 
         //changing the color of the card into the To Do column color, green
         parentTask.querySelector('p').className = "bg-success";
@@ -206,12 +196,14 @@ const changeStatus = (data) => {
         document.querySelector("#ToDoColumn").appendChild(parentTask);
 
     //this checks if the option selected was "Delete". There will be a pop up box asking if the user really wanted to delete the task item.
-    } else if (data.target.value.match("Delete")) {
+    } else if (data.target.getAttribute("value").match("Delete")) {
 
         if (window.confirm("Are you positive you want to delete this task? It cannot be undone.")) {
-            let id = Number(data.target.parentNode.parentNode.getAttribute("data-task-id"));
+            let toDelete = data.target.parentNode.parentNode.parentNode.outerHTML;
+            let id = Number(toDelete.getAttribute("data-task-id"));
+            console.log(`Delete task id: ${toDelete}`);
+            console.log(`The id: ${id}`);
             tm.deleteTask(id);
-            let parentTask = data.target.parentNode.parentNode;
 
             //this removes the deleted task from the web page
             parentTask.remove();
@@ -248,8 +240,8 @@ const changeStatusOnList = (id, status) => {
 
 
 //This listens to a change in the drop down menu of the individual tasks in the task list
-taskList.addEventListener("change", changeStatus);
-taskList.querySelector("#DoneColumn").addEventListener("click", changeStatus);
+taskList.addEventListener("click", changeStatus);
+// taskList.querySelector("#DoneColumn").addEventListener("click", changeStatus);
 
 
 //this is a function that sets the form date to tomorrow's date. This will be the default value of our Task form due value.
@@ -269,15 +261,6 @@ let defaultDate = () => {
 //This sets the due date to tomorrow's date on loading
 document.addEventListener("load", defaultDate());
 
-//sample task cards for troubleshooting
-// tm.addTask('Take out the trash', 'Take out the trash to the front of the house', 'Nick', '2020-09-20', "To Do");
-// console.log(tm.tasks);
-
-// tm.addTask('Milk', 'Get milk from Betsy', 'Sherri', '2020-09-20', "To Do");
-// console.log(tm.tasks);
-
-// tm.addTask('Egg', 'Get eggs from chicken', 'Lee', '2020-09-20', "Review");
-// console.log(tm.tasks);
 
 
 const tasks = tm.tasks;
