@@ -199,14 +199,14 @@ const changeStatus = (data) => {
     } else if (data.target.getAttribute("value").match("Delete")) {
 
         if (window.confirm("Are you positive you want to delete this task? It cannot be undone.")) {
-            let toDelete = data.target.parentNode.parentNode.parentNode.outerHTML;
-            let id = Number(toDelete.getAttribute("data-task-id"));
-            console.log(`Delete task id: ${toDelete}`);
+            let toDelete = data.target.parentNode.parentNode.parentNode;
+            let id = toDelete.getAttribute("data-task-id");
+            console.log(`Delete task outerHTML: ${toDelete.outerHTML}`);
             console.log(`The id: ${id}`);
             tm.deleteTask(id);
 
             //this removes the deleted task from the web page
-            parentTask.remove();
+            toDelete.remove();
 
         } else {
             return;
