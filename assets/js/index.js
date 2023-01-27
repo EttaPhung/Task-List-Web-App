@@ -203,7 +203,7 @@ const changeStatus = (data) => {
             let id = toDelete.getAttribute("data-task-id");
             console.log(`Delete task outerHTML: ${toDelete.outerHTML}`);
             console.log(`The id: ${id}`);
-            tm.deleteTask(id);
+            tm.deleteTask(Number(id));
 
             //this removes the deleted task from the web page
             toDelete.remove();
